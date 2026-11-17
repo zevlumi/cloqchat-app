@@ -38,3 +38,11 @@ document.querySelectorAll("[data-view]").forEach(b=>b.addEventListener("click",(
 }));
 if("serviceWorker" in navigator && location.protocol.startsWith("http"))navigator.serviceWorker.register("./sw.js").catch(()=>{});
 renderChats();
+// CLOQCHAT SUPABASE CONNECTION
+const SUPABASE_URL = "https://nptmamnwirnndatdafot.supabase.co/rest/v1/";
+const SUPABASE_KEY = "sb_publishable_4Qxdzq-igkJCowfqYy6b9Q_RZMTHb0x";
+
+const supabaseClient = window.supabase.createClient(
+  SUPABASE_URL,
+  SUPABASE_KEY
+);
