@@ -1,4 +1,4 @@
-# ZEVLUMI — Starter Web App
+# CLOQCHAT — Starter Web App
 
 **Tagline:** Your Chat. Your World.
 
