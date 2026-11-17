@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#101326">
+  <meta name="description" content="ZEVLUMI — Your Chat. Your World.">
+  <title>ZEVLUMI — Your Chat. Your World.</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar">
+      <div class="brand"><div class="brand-mark">Z</div><div><b>ZEVLUMI</b><small>Your Chat. Your World.</small></div></div>
+      <button class="new-chat" id="newChatBtn">＋ New conversation</button>
+      <nav class="main-nav">
+        <button class="nav-item active" data-view="chats">▣ <span>Chats</span></button>
+        <button class="nav-item" data-view="status">◉ <span>Status & Stories</span></button>
+        <button class="nav-item" data-view="groups">♧ <span>Groups</span></button>
+        <button class="nav-item" data-view="vault">▣ <span>Private Vault</span><em>Preview</em></button>
+      </nav>
+      <div class="side-label">MESSAGES <span>•••</span></div>
+      <div class="chat-list" id="chatList"></div>
+      <div class="sidebar-bottom">
+        <button class="nav-item" data-view="settings">⚙ <span>Settings</span></button>
+        <div class="user-mini"><div class="avatar me">M</div><div><b>My account</b><small>Demo profile</small></div><span class="online-dot"></span></div>
+      </div>
+    </aside>
+
+    <main class="main-panel">
+      <header class="topbar">
+        <div class="mobile-brand"><div class="brand-mark">Z</div><b>ZEVLUMI</b></div>
+        <div class="search-wrap"><span>⌕</span><input id="searchInput" placeholder="Search conversations..." aria-label="Search conversations"></div>
+        <div class="top-actions"><button class="icon-btn" title="Notifications">♧</button><button class="avatar me small">M</button></div>
+      </header>
+
+      <section class="content" id="content">
+        <div class="welcome-strip"><div><span class="eyebrow">YOUR PRIVATE SPACE</span><h1>Good to see you.</h1><p>Conversations that bring your world closer.</p></div><div class="welcome-orb">Z</div></div>
+        <div class="stories-row" id="storiesRow">
+          <button class="story add-story" id="addStory"><span>＋</span><small>Add story</small></button>
+          <button class="story"><span class="story-ring"><i>A</i></span><small>Ayesha</small></button>
+          <button class="story"><span class="story-ring"><i>U</i></span><small>Usman</small></button>
+          <button class="story"><span class="story-ring"><i>S</i></span><small>Sara</small></button>
+          <button class="story"><span class="story-ring"><i>H</i></span><small>Hamza</small></button>
+        </div>
+        <div class="section-heading"><div><span class="eyebrow">STAY CONNECTED</span><h2 id="sectionTitle">Recent conversations</h2></div><button class="text-button" id="seeAll">See all</button></div>
+        <div class="conversation-layout">
+          <div class="conversation-panel">
+            <div class="panel-heading"><b>Messages</b><span class="muted">Demo workspace</span></div>
+            <div id="conversationCards"></div>
+          </div>
+          <div class="chat-panel" id="chatPanel">
+            <div class="chat-header"><div class="avatar" id="activeAvatar">A</div><div class="chat-person"><b id="activeName">Ayesha Khan</b><small><span class="online-dot"></span> Available</small></div><div class="chat-tools"><button class="icon-btn" title="Voice call">⌕</button><button class="icon-btn" title="More">•••</button></div></div>
+            <div class="messages" id="messages">
+              <div class="date-chip">TODAY</div>
+              <div class="bubble received">Hey! Welcome to ZEVLUMI 👋<small>10:24 AM</small></div>
+              <div class="bubble sent">Thanks! Exploring the new app.<small>10:25 AM <span class="read">✓✓</span></small></div>
+              <div class="bubble received">This is the beginning of something great. ✨<small>10:26 AM</small></div>
+            </div>
+            <form class="composer" id="messageForm"><button type="button" class="attach-btn" id="attachBtn">＋</button><input id="messageInput" placeholder="Write a message..." autocomplete="off" aria-label="Write a message"><button type="button" class="emoji-btn" id="emojiBtn">☺</button><button class="send-btn" type="submit">➤</button></form>
+          </div>
+        </div>
+        <footer>End-to-end encryption is planned for a later security milestone. This starter currently uses local demo data only.</footer>
+      </section>
+    </main>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
