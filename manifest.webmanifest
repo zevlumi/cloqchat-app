@@ -1,0 +1,16 @@
+{
+  "name": "ZEVLUMI \u2014 Your Chat. Your World.",
+  "short_name": "ZEVLUMI",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0c1020",
+  "theme_color": "#101326",
+  "icons": [
+    {
+      "src": "./assets/icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}
