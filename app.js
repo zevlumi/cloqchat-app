@@ -127,3 +127,29 @@ document.getElementById("togglePassword").addEventListener("click", () => {
     password.type = "password";
   }
 });
+// CLOQCHAT SIGNUP / LOGIN TABS
+
+const showSignup = document.getElementById("showSignup");
+const showLogin = document.getElementById("showLogin");
+const signupBtn = document.getElementById("signupBtn");
+const loginBtn = document.getElementById("loginBtn");
+const authTitle = document.querySelector(".auth-box h2");
+const authMessage = document.getElementById("authMessage");
+
+showSignup.addEventListener("click", () => {
+  signupBtn.style.display = "block";
+  loginBtn.style.display = "none";
+  authTitle.textContent = "Create Account";
+  showSignup.classList.add("active");
+  showLogin.classList.remove("active");
+  authMessage.textContent = "";
+});
+
+showLogin.addEventListener("click", () => {
+  signupBtn.style.display = "none";
+  loginBtn.style.display = "block";
+  authTitle.textContent = "Welcome Back";
+  showLogin.classList.add("active");
+  showSignup.classList.remove("active");
+  authMessage.textContent = "";
+});
