@@ -183,3 +183,40 @@ document.getElementById("forgotPasswordBtn").addEventListener("click", async () 
     message.textContent = "Password reset email bhej di gayi hai. Apna inbox check karo.";
   }
 });
+// CLOQCHAT PASSWORD RESET
+supabaseClient.auth.onAuthStateChange((event, session) => {
+  if (event === "PASSWORD_RECOVERY") {
+    document.getElementById("resetPasswordBox").style.display = "block";
+
+    document.querySelector(".auth-box h2").textContent = "Choose New Password";
+    document.getElementById("authEmail").style.display = "none";
+    document.querySelector(".password-wrap").style.display = "none";
+    document.querySelector(".auth-tabs").style.display = "none";
+    document.getElementById("signupBtn").style.display = "none";
+    document.getElementById("loginBtn").style.display = "none";
+    document.getElementById("forgotPasswordBtn").style.display = "none";
+  }
+});
+
+
+document.getElementById("updatePasswordBtn").addEventListener("click", async () => {
+  const newPassword = document.getElementById("newPassword").value;
+  const message = document.getElementById("resetMessage");
+
+  if (newPassword.length < 6) {
+    message.textContent = "Password kam az kam 6 characters ka hona chahiye.";
+    return;
+  }
+
+  message.textContent = "Password update ho raha hai...";
+
+  const { error } = await supabaseClient.auth.updateUser({
+    password: newPassword
+  });
+
+  if (error) {
+    message.textContent = error.message;
+  } else {
+    message.textContent = "Password successfully change ho gaya!";
+  }
+});
