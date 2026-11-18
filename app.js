@@ -66,3 +66,53 @@ supabaseClient
 );
     }
   });
+// CLOQCHAT SIGNUP SYSTEM
+
+document.getElementById("signupBtn").addEventListener("click", async () => {
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+  const message = document.getElementById("authMessage");
+
+  if (!email || !password) {
+    message.textContent = "Email aur password enter karo.";
+    return;
+  }
+
+  message.textContent = "Account ban raha hai...";
+
+  const { data, error } = await supabaseClient.auth.signUp({
+    email,
+    password
+  });
+
+  if (error) {
+    message.textContent = error.message;
+  } else {
+    message.textContent = "Signup successful! Email check karo.";
+  }
+});
+// CLOQCHAT LOGIN SYSTEM
+
+document.getElementById("loginBtn").addEventListener("click", async () => {
+  const email = document.getElementById("authEmail").value.trim();
+  const password = document.getElementById("authPassword").value;
+  const message = document.getElementById("authMessage");
+
+  if (!email || !password) {
+    message.textContent = "Email aur password enter karo.";
+    return;
+  }
+
+  message.textContent = "Login ho raha hai...";
+
+  const { data, error } = await supabaseClient.auth.signInWithPassword({
+    email,
+    password
+  });
+
+  if (error) {
+    message.textContent = error.message;
+  } else {
+    message.textContent = "Login successful! Welcome to CLOQCHAT.";
+  }
+});
