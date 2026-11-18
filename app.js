@@ -120,13 +120,17 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
 
 document.getElementById("togglePassword").addEventListener("click", () => {
   const password = document.getElementById("authPassword");
+  const eyeButton = document.getElementById("togglePassword");
 
   if (password.type === "password") {
     password.type = "text";
+    eyeButton.textContent = "👁️";
   } else {
     password.type = "password";
+    eyeButton.textContent = "🙈";
   }
 });
+
 // CLOQCHAT SIGNUP / LOGIN TABS
 
 const showSignup = document.getElementById("showSignup");
