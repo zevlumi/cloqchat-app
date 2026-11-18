@@ -84,3 +84,31 @@
 .app-shell {
   display: none;
 }
+/* CLOQCHAT AUTH TABS DESIGN */
+
+.auth-tabs {
+  display: flex;
+  gap: 8px;
+  padding: 5px;
+  margin: 20px 0;
+  background: #101326;
+  border-radius: 12px;
+}
+
+.auth-tabs .auth-tab {
+  flex: 1;
+  margin: 0;
+  background: transparent;
+  color: #aab2ca;
+  border-radius: 9px;
+}
+
+.auth-tabs .auth-tab.active {
+  background: #62e6c5;
+  color: #101326;
+}
+
+#signupBtn,
+#loginBtn {
+  width: 100%;
+}
