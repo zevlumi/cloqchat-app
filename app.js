@@ -53,8 +53,14 @@ supabaseClient
   .limit(1)
   .then(({ data, error }) => {
     if (error) {
-      console.error("CLOQCHAT connection error:", error.message);
+      document.body.insertAdjacentHTML(
+  "beforeend",
+  '<h3 style="color:red;text-align:center">DATABASE ERROR: ' + error.message + '</h3>'
+);
     } else {
-      console.log("CLOQCHAT Supabase connected!");
+      document.body.insertAdjacentHTML(
+  "beforeend",
+  '<h3 style="color:green;text-align:center">CLOQCHAT DATABASE CONNECTED!</h3>'
+);
     }
   });
