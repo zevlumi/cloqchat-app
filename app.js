@@ -153,3 +153,26 @@ showLogin.addEventListener("click", () => {
   showSignup.classList.remove("active");
   authMessage.textContent = "";
 });
+// CLOQCHAT FORGOT PASSWORD SYSTEM
+
+document.getElementById("forgotPasswordBtn").addEventListener("click", async () => {
+  const email = document.getElementById("authEmail").value.trim();
+  const message = document.getElementById("authMessage");
+
+  if (!email) {
+    message.textContent = "Pehle apna email enter karo.";
+    return;
+  }
+
+  message.textContent = "Reset email bheji ja rahi hai...";
+
+  const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
+    redirectTo: window.location.origin
+  });
+
+  if (error) {
+    message.textContent = error.message;
+  } else {
+    message.textContent = "Password reset email bhej di gayi hai. Apna inbox check karo.";
+  }
+});
