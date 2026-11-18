@@ -116,3 +116,14 @@ document.getElementById("loginBtn").addEventListener("click", async () => {
     message.textContent = "Login successful! Welcome to CLOQCHAT.";
   }
 });
+// CLOQCHAT PASSWORD SHOW / HIDE
+
+document.getElementById("togglePassword").addEventListener("click", () => {
+  const password = document.getElementById("authPassword");
+
+  if (password.type === "password") {
+    password.type = "text";
+  } else {
+    password.type = "password";
+  }
+});
