@@ -161,16 +161,21 @@ showLogin.addEventListener("click", () => {
 });
 // CLOQCHAT FORGOT PASSWORD SYSTEM
 
+let resetCooldownTimer;
+
 document.getElementById("forgotPasswordBtn").addEventListener("click", async () => {
   const email = document.getElementById("authEmail").value.trim();
   const message = document.getElementById("authMessage");
- const forgotPasswordBtn = document.getElementById("forgotPasswordBtn");
+  const button = document.getElementById("forgotPasswordBtn");
 
   if (!email) {
     message.textContent = "Pehle apna email enter karo.";
     return;
   }
 
+  if (button.disabled) return;
+
+  button.disabled = true;
   message.textContent = "Reset email bheji ja rahi hai...";
 
   const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
@@ -178,11 +183,42 @@ document.getElementById("forgotPasswordBtn").addEventListener("click", async () 
   });
 
   if (error) {
-    message.textContent = error.message;
-  } else {
-    message.textContent = "Password reset email bhej di gayi hai. Apna inbox check karo.";
+    button.disabled = false;
+
+    if (
+      error.message.toLowerCase().includes("rate limit") ||
+      error.message.toLowerCase().includes("limit exceeded")
+    ) {
+      message.textContent =
+        "Email limit poori ho gayi hai. Kuch der baad dobara try karein.";
+    } else {
+      message.textContent = error.message;
+    }
+
+    return;
   }
+
+  let seconds = 60;
+  message.textContent =
+    "Reset email bhej di gayi hai. Dobara try karne ke liye 60 seconds wait karein.";
+
+  button.textContent = "Wait 60s";
+
+  resetCooldownTimer = setInterval(() => {
+    seconds--;
+
+    if (seconds > 0) {
+      button.textContent = `Wait ${seconds}s`;
+    } else {
+      clearInterval(resetCooldownTimer);
+      button.disabled = false;
+      button.textContent = "Forgot Password?";
+      message.textContent = "Ab dobara reset email bhej sakte hain.";
+    }
+  }, 1000);
 });
+
+
 // CLOQCHAT PASSWORD RESET
 supabaseClient.auth.onAuthStateChange((event, session) => {
   if (event === "PASSWORD_RECOVERY") {
