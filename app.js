@@ -46,3 +46,15 @@ const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
   SUPABASE_KEY
 );
+// CLOQCHAT CONNECTION TEST
+supabaseClient
+  .from("profiles")
+  .select("*")
+  .limit(1)
+  .then(({ data, error }) => {
+    if (error) {
+      console.error("CLOQCHAT connection error:", error.message);
+    } else {
+      console.log("CLOQCHAT Supabase connected!");
+    }
+  });
