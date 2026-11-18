@@ -147,6 +147,7 @@ showSignup.addEventListener("click", () => {
   showSignup.classList.add("active");
   showLogin.classList.remove("active");
   authMessage.textContent = "";
+ forgotPasswordBtn.style.display = "none";
 });
 
 showLogin.addEventListener("click", () => {
@@ -156,12 +157,14 @@ showLogin.addEventListener("click", () => {
   showLogin.classList.add("active");
   showSignup.classList.remove("active");
   authMessage.textContent = "";
+ forgotPasswordBtn.style.display = "block";
 });
 // CLOQCHAT FORGOT PASSWORD SYSTEM
 
 document.getElementById("forgotPasswordBtn").addEventListener("click", async () => {
   const email = document.getElementById("authEmail").value.trim();
   const message = document.getElementById("authMessage");
+ const forgotPasswordBtn = document.getElementById("forgotPasswordBtn");
 
   if (!email) {
     message.textContent = "Pehle apna email enter karo.";
