@@ -136,3 +136,18 @@
   border: none;
   cursor: pointer;
 }
+.auth-link {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  color: #499AFF;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+}
+
+.auth-link:hover {
+  text-decoration: underline;
+}
