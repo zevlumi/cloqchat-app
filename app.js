@@ -66,6 +66,7 @@ supabaseClient
 );
     }
   });
+
 // CLOQCHAT SIGNUP SYSTEM
 
 document.getElementById("signupBtn").addEventListener("click", async () => {
@@ -87,10 +88,19 @@ document.getElementById("signupBtn").addEventListener("click", async () => {
 
   if (error) {
     message.textContent = error.message;
+    return;
+  }
+
+  if (data.user && !data.session) {
+    document.getElementById("otpBox").style.display = "block";
+    message.textContent = "8-digit OTP aapki email par bhej diya gaya hai. Inbox check karein.";
   } else {
-    message.textContent = "Signup successful! Email check karo.";
+    message.textContent = "Account successfully created!";
   }
 });
+
+
+
 // CLOQCHAT OTP VERIFICATION
 
 document.getElementById("verifyOtpBtn").addEventListener("click", async () => {
