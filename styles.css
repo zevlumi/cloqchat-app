@@ -179,3 +179,16 @@
   cursor: pointer;
   z-index: 2;
 }
+#showSignup,
+#showLogin {
+  display: inline-block;
+  white-space: nowrap;
+  width: auto;
+  padding: 0;
+  margin: 0;
+  vertical-align: baseline;
+}
+
+.auth-box p {
+  text-align: center;
+}
