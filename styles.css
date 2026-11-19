@@ -50,7 +50,8 @@
   outline: none;
 }
 
-.auth-box button {
+
+.auth-box button:not(.auth-link) {
   width: 100%;
   padding: 14px;
   margin-top: 12px;
@@ -62,9 +63,10 @@
   cursor: pointer;
 }
 
-.auth-box button:hover {
+.auth-box button:not(.auth-link):hover {
   opacity: 0.85;
 }
+
 
 #authMessage {
   margin-top: 18px;
