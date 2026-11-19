@@ -192,3 +192,10 @@
 .auth-box p {
   text-align: center;
 }
+.auth-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 12px;
+}
