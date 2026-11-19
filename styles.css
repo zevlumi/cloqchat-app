@@ -153,3 +153,29 @@
 .auth-link:hover {
   text-decoration: underline;
 }
+.password-wrap {
+  position: relative;
+  width: 100%;
+}
+
+.password-wrap input {
+  width: 100%;
+  padding-right: 55px;
+  box-sizing: border-box;
+}
+
+.password-wrap button#togglePassword {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  margin: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  cursor: pointer;
+  z-index: 2;
+}
