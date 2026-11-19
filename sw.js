@@ -1,12 +1,17 @@
 
-const CACHE = "CLOQCHAT-v2";
+const CACHE = "CLOQCHAT-v3";
 
 const FILES = [
   "./",
   "./index.html",
   "./styles.css",
   "./app.js",
-  "./manifest.webmanifest"
+  "./manifest.webmanifest",
+  "./icon-192.png",
+  "./icon-512.png",
+  "./icon-maskable-512.png",
+  "./favicon-32.png",
+  "./apple-touch-icon.png"
 ];
 
 self.addEventListener("install", event => {
