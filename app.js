@@ -91,6 +91,33 @@ document.getElementById("signupBtn").addEventListener("click", async () => {
     message.textContent = "Signup successful! Email check karo.";
   }
 });
+// CLOQCHAT OTP VERIFICATION
+
+document.getElementById("verifyOtpBtn").addEventListener("click", async () => {
+  const email = document.getElementById("authEmail").value.trim();
+  const token = document.getElementById("otpCode").value.trim();
+  const message = document.getElementById("authMessage");
+
+  if (token.length !== 8) {
+    message.textContent = "8-digit OTP enter karo.";
+    return;
+  }
+
+  message.textContent = "OTP verify ho raha hai...";
+
+  const { error } = await supabaseClient.auth.verifyOtp({
+    email,
+    token,
+    type: "signup"
+  });
+
+  if (error) {
+    message.textContent = error.message;
+  } else {
+    message.textContent = "Email verified! CLOQCHAT mein welcome.";
+    document.getElementById("otpBox").style.display = "none";
+  }
+});
 // CLOQCHAT LOGIN SYSTEM
 
 document.getElementById("loginBtn").addEventListener("click", async () => {
