@@ -10,56 +10,103 @@
   <link rel="stylesheet" href="./styles.css?v=2">
 </head>
 <body>
-  <div id="authScreen" class="auth-screen">
+  
+<div id="authScreen" class="auth-screen">
   <div class="auth-box">
     <h1>CLOQCHAT</h1>
     <p>Your Chat. Your World.</p>
 
-    <h2>Welcome</h2>
+    <h2 id="authTitle">Create Account</h2>
 
-    <input id="authEmail" type="email" placeholder="Enter your email">
-    <div class="password-wrap">
-  <input id="authPassword" type="password" placeholder="Enter password">
-  <button type="button" id="togglePassword">👁</button>
+    <!-- Email and Password -->
+    <div id="authCredentials">
+      <input
+        id="authEmail"
+        type="email"
+        placeholder="Enter your email"
+        autocomplete="email"
+      >
+
+      <div class="password-wrap">
+        <input
+          id="authPassword"
+          type="password"
+          placeholder="Enter password"
+          autocomplete="current-password"
+        >
+        <button type="button" id="togglePassword">👁</button>
+      </div>
     </div>
+
+    <!-- Signup Screen -->
+    <div id="signupActions">
+      <button type="button" id="signupBtn">Create Account</button>
+      <p>
+        Already have an account?
+        <button type="button" id="showLogin" class="auth-link">Log in</button>
+      </p>
+    </div>
+
+    <!-- Login Screen -->
+    <div id="loginActions" style="display:none;">
+      <button type="button" id="loginBtn">Login</button>
+
+      <button
+        type="button"
+        id="forgotPasswordBtn"
+        class="forgot-password"
+      >
+        Forgot Password?
+      </button>
+
+      <p>
+        New to CLOQCHAT?
+        <button type="button" id="showSignup" class="auth-link">
+          Create Account
+        </button>
+      </p>
+    </div>
+
+    <!-- OTP Verification Screen -->
     <div id="otpBox" style="display:none;">
-  <input
-    id="otpCode"
-    type="text"
-    inputmode="numeric"
-    maxlength="8"
-    placeholder="Enter 8-digit OTP"
-  >
-  <button type="button" id="verifyOtpBtn">Verify OTP</button>
-  <button type="button" id="resendOtpBtn">Resend OTP</button>
-    </div>
-<div class="auth-tabs">
-  <button type="button" id="showSignup" class="auth-tab active">Sign Up</button>
-  <button type="button" id="showLogin" class="auth-tab">Login</button>
-</div>
+      <p>Enter the 8-digit code sent to your email.</p>
 
-<button id="signupBtn">Create Account</button>
-    <button id="loginBtn" style="display:none;">Login</button>
-    
+      <input
+        id="otpCode"
+        type="text"
+        inputmode="numeric"
+        maxlength="8"
+        placeholder="Enter 8-digit OTP"
+        autocomplete="one-time-code"
+      >
+
+      <button type="button" id="verifyOtpBtn">Verify OTP</button>
+      <button type="button" id="resendOtpBtn">Resend OTP</button>
+    </div>
 
     <p id="authMessage"></p>
-    <button type="button" id="forgotPasswordBtn" class="forgot-password" style="display:none;">
-  Forgot Password?
-    </button>
+
+    <!-- Password Reset -->
     <div id="resetPasswordBox" style="display:none;">
-  <h2>Reset Password</h2>
-  <input
-    type="password"
-    id="newPassword"
-    placeholder="Enter new password"
-  >
-  <button type="button" id="updatePasswordBtn">
-    Update Password
-  </button>
-  <p id="resetMessage"></p>
+      <h2>Choose New Password</h2>
+
+      <input
+        type="password"
+        id="newPassword"
+        placeholder="Enter new password"
+        autocomplete="new-password"
+      >
+
+      <button type="button" id="updatePasswordBtn">
+        Update Password
+      </button>
+
+      <p id="resetMessage"></p>
     </div>
   </div>
-  </div>
+</div>
+  
+  
   <div class="app-shell">
     <aside class="sidebar">
       <div class="brand"><div class="brand-mark">Z</div><div><b>CLOQCHAT</b><small>Your Chat. Your World.</small></div></div>
