@@ -22,6 +22,17 @@
   <input id="authPassword" type="password" placeholder="Enter password">
   <button type="button" id="togglePassword">👁</button>
     </div>
+    <div id="otpBox" style="display:none;">
+  <input
+    id="otpCode"
+    type="text"
+    inputmode="numeric"
+    maxlength="8"
+    placeholder="Enter 8-digit OTP"
+  >
+  <button type="button" id="verifyOtpBtn">Verify OTP</button>
+  <button type="button" id="resendOtpBtn">Resend OTP</button>
+    </div>
 <div class="auth-tabs">
   <button type="button" id="showSignup" class="auth-tab active">Sign Up</button>
   <button type="button" id="showLogin" class="auth-tab">Login</button>
