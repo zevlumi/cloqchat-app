@@ -199,3 +199,20 @@
   display: block;
   margin: 0 auto 12px;
 }
+/* CLOQCHAT Button Press Animation */
+
+.auth-box button:not(.auth-link) {
+  transition: transform 0.12s ease, opacity 0.12s ease, box-shadow 0.12s ease;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.auth-box button:not(.auth-link):active {
+  transform: scale(0.96);
+  opacity: 0.82;
+  box-shadow: inset 0 3px 6px rgba(0, 0, 0, 0.25);
+}
+
+.auth-box button:not(.auth-link):focus-visible {
+  outline: 2px solid #62e6c5;
+  outline-offset: 3px;
+}
