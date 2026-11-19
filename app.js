@@ -67,12 +67,14 @@ supabaseClient
     }
   });
 
+
 // CLOQCHAT SIGNUP SYSTEM
 
 document.getElementById("signupBtn").addEventListener("click", async () => {
   const email = document.getElementById("authEmail").value.trim();
   const password = document.getElementById("authPassword").value;
   const message = document.getElementById("authMessage");
+  const otpBox = document.getElementById("otpBox");
 
   if (!email || !password) {
     message.textContent = "Email aur password enter karo.";
@@ -80,6 +82,7 @@ document.getElementById("signupBtn").addEventListener("click", async () => {
   }
 
   message.textContent = "Account ban raha hai...";
+  otpBox.style.display = "none";
 
   const { data, error } = await supabaseClient.auth.signUp({
     email,
@@ -92,42 +95,16 @@ document.getElementById("signupBtn").addEventListener("click", async () => {
   }
 
   if (data.user && !data.session) {
-    document.getElementById("otpBox").style.display = "block";
-    message.textContent = "8-digit OTP aapki email par bhej diya gaya hai. Inbox check karein.";
-  } else {
+    otpBox.style.display = "block";
+    message.textContent =
+      "Agar is email par pehle account bana hua hai to Login karein. Warna 8-digit OTP email check karein.";
+  } else if (data.user && data.session) {
     message.textContent = "Account successfully created!";
-  }
-});
-
-
-
-// CLOQCHAT OTP VERIFICATION
-
-document.getElementById("verifyOtpBtn").addEventListener("click", async () => {
-  const email = document.getElementById("authEmail").value.trim();
-  const token = document.getElementById("otpCode").value.trim();
-  const message = document.getElementById("authMessage");
-
-  if (token.length !== 8) {
-    message.textContent = "8-digit OTP enter karo.";
-    return;
-  }
-
-  message.textContent = "OTP verify ho raha hai...";
-
-  const { error } = await supabaseClient.auth.verifyOtp({
-    email,
-    token,
-    type: "signup"
-  });
-
-  if (error) {
-    message.textContent = error.message;
   } else {
-    message.textContent = "Email verified! CLOQCHAT mein welcome.";
-    document.getElementById("otpBox").style.display = "none";
+    message.textContent = "Signup complete nahi hua. Dobara try karein.";
   }
 });
+
 // CLOQCHAT LOGIN SYSTEM
 
 document.getElementById("loginBtn").addEventListener("click", async () => {
