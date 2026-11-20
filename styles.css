@@ -26,6 +26,8 @@
   color: #62e6c5;
   letter-spacing: 3px;
   margin: 0 0 4px;
+  text-align: center;
+width: 100%;
 }
 
 .auth-box p {
