@@ -1,4 +1,3 @@
-
 const CACHE = "CLOQCHAT-v4";
 
 const FILES = [
