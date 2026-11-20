@@ -14,24 +14,26 @@
   padding: 20px;
 }
 
-.auth-box {
-  width: 100%;
-  max-width: 400px;
-  background: #191e36;
-  padding: 35px 25px;
-  border-radius: 20px;
-  text-align: center;
-  color: white;
-  box-shadow: 0 10px 40px #0006;
+.auth-logo {
+  width: 100px;
+  height: 100px;
+  object-fit: contain;
+  display: block;
+  margin: 0 auto 5px;
 }
 
 .auth-box h1 {
   color: #62e6c5;
   letter-spacing: 3px;
+  margin: 0 0 4px;
 }
 
 .auth-box p {
   color: #aab2ca;
+}
+
+.auth-box h1 + p {
+  margin: 0 0 20px;
 }
 
 .auth-box h2 {
