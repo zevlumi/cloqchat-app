@@ -149,30 +149,39 @@
   </aside>
 
   <main class="main-panel">
-    <header class="topbar">
-      <div class="mobile-brand">
-        <div class="brand-mark">C</div><b>CLOQCHAT</b>
-      </div>
-      <div class="search-wrap">
-        <span>⌕</span>
-        <input id="searchInput" placeholder="Search conversations..." aria-label="Search conversations">
-      </div>
-      <div class="top-actions">
-        <button class="icon-btn" title="Notifications">♧</button>
-        <button class="avatar me small">M</button>
-      </div>
-    </header>
+    
+<header class="topbar">
+  <div class="mobile-brand">
+    <div class="brand-mark">C</div>
+    <b>CLOQCHAT</b>
+  </div>
+
+  <div class="top-actions">
+    <button class="avatar me small">M</button>
+  </div>
+</header>
+
+<div class="search-row">
+  <div class="search-wrap">
+    <span>⌕</span>
+    <input
+      id="searchInput"
+      placeholder="Search conversations..."
+      aria-label="Search conversations"
+    >
+  </div>
+</div>
+    
 
     <section class="content" id="content">
 
       <!-- CHATS HOME -->
       <section id="chatsView" class="home-view">
-        <div class="chat-heading">
-  <div>
-    <span class="eyebrow">CLOQCHAT</span>
-    <h1>Your Chats</h1>
-    <p>Your conversations, all in one place.</p>
-  </div>
+        
+<div class="chat-heading">
+  <h1>Your Chats</h1>
+</div>
+        
 
   <button class="new-chat-main" id="newChatMainBtn">
     <span>+</span> New Chat
@@ -188,12 +197,21 @@
         </div>
 
         <div class="chat-filters" id="chatFilters">
-          <button class="filter-chip active" data-filter="all">All</button>
-          <button class="filter-chip" data-filter="unread">Unread</button>
-          <button class="filter-chip" data-filter="favorites">Favorites</button>
-          <button class="filter-chip" data-filter="groups">Groups</button>
-          <button class="filter-chip" data-filter="rooms">Rooms</button>
+  <button class="filter-chip active" data-filter="all">All</button>
+  <button class="filter-chip" data-filter="unread">Unread</button>
+  <button class="filter-chip" data-filter="favorites">Favorites</button>
+  <button class="filter-chip" data-filter="groups">Groups</button>
         </div>
+        
+<button
+  class="new-chat-fab"
+  id="newChatMainBtn"
+  aria-label="New Chat"
+  title="New Chat"
+>
+  +
+</button>
+        
 
         <div class="conversation-layout">
           <div class="conversation-panel">
