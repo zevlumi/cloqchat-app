@@ -700,3 +700,11 @@ async function initializeAuth() {
 }
 
 initializeAuth();
+// Connect mobile New Chat button
+const mobileNewChatBtn = $("#newChatMainBtn");
+
+if (mobileNewChatBtn) {
+  mobileNewChatBtn.addEventListener("click", () => {
+    $("#newChatBtn")?.click();
+  });
+}
