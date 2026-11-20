@@ -205,6 +205,7 @@ function showLoginScreen() {
   authTitle.textContent = "Welcome Back";
 
   authCredentials.style.display = "block";
+  forgotPasswordBtn.style.display = "block";
   signupActions.style.display = "none";
   loginActions.style.display = "block";
   otpBox.style.display = "none";
