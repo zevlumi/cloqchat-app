@@ -850,3 +850,69 @@ width: 100%;
     display: none;
   }
 }
+/* CLOQCHAT PREMIUM NAVY THEME */
+
+:root {
+  --bg: #0c1020;
+  --panel: #12182b;
+  --panel2: #171f36;
+  --line: #28314b;
+  --text: #f4f5fb;
+  --muted: #8993ae;
+  --purple: #7957f5;
+  --mint: #55dfc0;
+}
+
+html,
+body,
+.app-shell,
+.main-panel {
+  background-color: #0c1020 !important;
+  color: #f4f5fb;
+}
+
+.sidebar {
+  background: #101629 !important;
+  border-right: 1px solid #28314b;
+}
+
+.topbar {
+  background: #101629 !important;
+  border-bottom: 1px solid #28314b;
+}
+
+.chat-panel,
+.conversation-list,
+.conversation-card {
+  background-color: #12182b;
+}
+
+.brand-mark {
+  background: linear-gradient(135deg, #7957f5, #3c8eea) !important;
+  color: #fff !important;
+  border-radius: 14px;
+  box-shadow: 0 5px 20px rgba(121, 87, 245, .25);
+}
+
+@media (max-width: 600px) {
+  .sidebar {
+    display: none !important;
+  }
+
+  .main-panel {
+    width: 100%;
+    min-width: 0;
+    margin: 0;
+    padding-bottom: 85px;
+  }
+
+  .topbar {
+    padding: 12px;
+  }
+
+  .mobile-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+}
