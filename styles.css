@@ -234,3 +234,523 @@ width: 100%;
     padding-top: 24px;
   }
 }
+/* =====================================
+   CLOQCHAT NEW HOME PAGE DESIGN
+   Login screen CSS remains untouched
+===================================== */
+
+:root {
+  --home-bg: #0c1020;
+  --home-card: #12182b;
+  --home-card2: #171f36;
+  --home-line: #28314b;
+  --home-text: #f4f5fb;
+  --home-muted: #8993ae;
+  --home-purple: #a78bfa;
+  --home-mint: #64d9d0;
+}
+
+.app-shell {
+  background: var(--home-bg);
+  color: var(--home-text);
+  min-height: 100vh;
+}
+
+.sidebar {
+  background: #101629;
+  border-right: 1px solid var(--home-line);
+}
+
+.brand-mark {
+  background: linear-gradient(135deg, #a78bfa, #55d8cb);
+  color: #101629;
+  border-radius: 13px;
+  font-weight: 900;
+  box-shadow: 0 0 22px #a78bfa35;
+}
+
+.brand b,
+.mobile-brand b {
+  letter-spacing: 2px;
+}
+
+.new-chat {
+  background: linear-gradient(110deg, #8b72e8, #55cfc6);
+  color: #101629;
+  border: none;
+  border-radius: 12px;
+  font-weight: 800;
+  transition: .2s;
+}
+
+.new-chat:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 7px 24px #8b72e840;
+}
+
+.main-nav {
+  gap: 7px;
+}
+
+.nav-item {
+  border-radius: 11px;
+  transition: .2s;
+}
+
+.nav-item.active,
+.nav-item:hover {
+  background: #242744;
+  color: var(--home-mint);
+}
+
+.topbar {
+  background: #0e1425;
+  border-bottom: 1px solid var(--home-line);
+}
+
+.search-wrap {
+  background: var(--home-card);
+  border: 1px solid var(--home-line);
+  border-radius: 13px;
+}
+
+.search-wrap input {
+  color: var(--home-text);
+}
+
+.search-wrap input::placeholder {
+  color: var(--home-muted);
+}
+
+.icon-btn {
+  border-radius: 11px;
+  transition: .2s;
+}
+
+.icon-btn:hover {
+  background: #252b47;
+  color: var(--home-mint);
+}
+
+.content {
+  background: var(--home-bg);
+}
+
+.welcome-strip {
+  background:
+    radial-gradient(circle at 85% 20%, #a78bfa30, transparent 30%),
+    linear-gradient(120deg, #1b2140, #121b30);
+  border: 1px solid #34365d;
+  border-radius: 20px;
+  padding: 27px;
+  margin-bottom: 28px;
+  overflow: hidden;
+}
+
+.welcome-strip h1 {
+  color: white;
+  font-size: clamp(25px, 4vw, 36px);
+  margin: 9px 0;
+}
+
+.welcome-strip p {
+  color: #aab4ce;
+}
+
+.welcome-orb {
+  background: linear-gradient(135deg, #a78bfa, #64d9d0);
+  color: #101629;
+  border-radius: 50%;
+  box-shadow: 0 0 45px #a78bfa50;
+  font-weight: 900;
+}
+
+.eyebrow {
+  color: var(--home-mint);
+  letter-spacing: 2px;
+  font-size: 10px;
+  font-weight: 800;
+}
+
+.section-heading h2,
+.extra-view h2 {
+  color: var(--home-text);
+}
+
+.text-button {
+  color: var(--home-mint);
+}
+
+.chat-filters {
+  display: flex;
+  gap: 9px;
+  overflow-x: auto;
+  padding: 4px 0 17px;
+  scrollbar-width: none;
+}
+
+.chat-filters::-webkit-scrollbar {
+  display: none;
+}
+
+.filter-chip {
+  flex-shrink: 0;
+  padding: 9px 17px;
+  border-radius: 30px;
+  border: 1px solid var(--home-line);
+  background: var(--home-card);
+  color: var(--home-muted);
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: 700;
+  transition: .2s;
+}
+
+.filter-chip.active,
+.filter-chip:hover {
+  background: #302b55;
+  border-color: var(--home-purple);
+  color: white;
+}
+
+.conversation-panel,
+.chat-panel {
+  background: var(--home-card);
+  border: 1px solid var(--home-line);
+  border-radius: 16px;
+  overflow: hidden;
+}
+
+.panel-heading,
+.chat-header {
+  background: #151d33;
+  border-bottom: 1px solid var(--home-line);
+}
+
+.panel-heading b,
+.chat-person b {
+  color: white;
+}
+
+.muted,
+.chat-person small {
+  color: var(--home-muted);
+}
+
+.chat-header {
+  padding: 15px;
+}
+
+.avatar {
+  background: linear-gradient(135deg, #987ce9, #52cfc3);
+  color: #101629;
+  font-weight: 900;
+}
+
+.avatar.me {
+  background: linear-gradient(135deg, #a78bfa, #64d9d0);
+}
+
+.messages {
+  background:
+    radial-gradient(circle at 20% 20%, #a78bfa0b, transparent 35%),
+    #10172a;
+}
+
+.bubble {
+  border-radius: 15px;
+  padding: 11px 14px;
+}
+
+.bubble.received {
+  background: #222b43;
+  color: white;
+}
+
+.bubble.sent {
+  background: #443b78;
+  color: white;
+}
+
+.bubble small {
+  color: #aab4ce;
+}
+
+.composer {
+  background: #151d33;
+  border-top: 1px solid var(--home-line);
+}
+
+.composer input {
+  background: #0e1527;
+  color: white;
+  border: 1px solid var(--home-line);
+  border-radius: 12px;
+}
+
+.send-btn {
+  background: linear-gradient(135deg, #a78bfa, #64d9d0);
+  color: #101629;
+  border-radius: 12px;
+}
+
+.online-dot {
+  background: #65dda0;
+  box-shadow: 0 0 8px #65dda080;
+}
+
+.extra-view {
+  min-height: 65vh;
+  padding: 22px 5px;
+}
+
+.extra-view h2 {
+  font-size: 30px;
+  margin: 10px 0;
+}
+
+.extra-view > p {
+  color: var(--home-muted);
+}
+
+.empty-state {
+  margin-top: 25px;
+  padding: 45px 20px;
+  background: var(--home-card);
+  border: 1px solid var(--home-line);
+  border-radius: 18px;
+  text-align: center;
+  color: var(--home-purple);
+  font-size: 35px;
+}
+
+.empty-state h3 {
+  color: white;
+  font-size: 18px;
+  margin: 15px 0 8px;
+}
+
+.empty-state p {
+  color: var(--home-muted);
+  font-size: 13px;
+}
+
+.room-tabs {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+}
+
+.room-tab {
+  background: var(--home-card);
+  color: var(--home-muted);
+  border: 1px solid var(--home-line);
+  border-radius: 25px;
+  padding: 10px 22px;
+  font-weight: 800;
+}
+
+.room-tab.active {
+  color: var(--home-mint);
+  border-color: var(--home-purple);
+  background: #292545;
+}
+
+.settings-list {
+  margin-top: 24px;
+  display: grid;
+  gap: 10px;
+}
+
+.settings-item {
+  background: var(--home-card);
+  border: 1px solid var(--home-line);
+  border-radius: 13px;
+  padding: 17px;
+  color: var(--home-mint);
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  font-size: 16px;
+}
+
+.settings-item span {
+  color: white;
+  font-size: 14px;
+}
+
+.mobile-bottom-nav {
+  display: none;
+}
+
+/* MOBILE HOME PAGE */
+@media (max-width: 700px) {
+  .app-shell {
+    display: block;
+    min-height: 100dvh;
+    padding-bottom: 0;
+  }
+
+  .sidebar {
+    display: none !important;
+  }
+
+  .main-panel {
+    width: 100%;
+    min-width: 0;
+  }
+
+  .topbar {
+    position: sticky;
+    top: 0;
+    z-index: 20;
+    padding: 10px 13px;
+    gap: 9px;
+  }
+
+  .mobile-brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-shrink: 0;
+    font-size: 12px;
+  }
+
+  .mobile-brand .brand-mark {
+    width: 31px;
+    height: 31px;
+    display: grid;
+    place-items: center;
+  }
+
+  .search-wrap {
+    min-width: 0;
+    flex: 1;
+  }
+
+  .search-wrap input {
+    min-width: 0;
+    width: 100%;
+    font-size: 11px;
+  }
+
+  .top-actions {
+    gap: 5px;
+  }
+
+  .top-actions .icon-btn {
+    display: none;
+  }
+
+  .top-actions .avatar {
+    width: 31px;
+    height: 31px;
+  }
+
+  .content {
+    padding: 15px 12px 95px !important;
+  }
+
+  .welcome-strip {
+    padding: 20px 17px;
+    border-radius: 16px;
+    margin-bottom: 23px;
+  }
+
+  .welcome-strip h1 {
+    font-size: 25px;
+  }
+
+  .welcome-strip p {
+    font-size: 12px;
+    max-width: 220px;
+  }
+
+  .welcome-orb {
+    width: 54px;
+    height: 54px;
+    font-size: 22px;
+  }
+
+  .section-heading {
+    margin-bottom: 12px;
+  }
+
+  .section-heading h2 {
+    font-size: 19px;
+  }
+
+  .conversation-layout {
+    display: block;
+  }
+
+  .conversation-panel {
+    width: 100%;
+  }
+
+  .chat-panel {
+    display: none;
+  }
+
+  .mobile-bottom-nav {
+    display: flex;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 100;
+    justify-content: space-around;
+    align-items: center;
+    background: #11182b;
+    border-top: 1px solid var(--home-line);
+    padding: 9px 4px calc(9px + env(safe-area-inset-bottom));
+  }
+
+  .bottom-nav-item {
+    border: none;
+    background: transparent;
+    color: #8993ae;
+    min-width: 52px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    font-size: 20px;
+  }
+
+  .bottom-nav-item small {
+    font-size: 10px;
+    font-weight: 700;
+  }
+
+  .bottom-nav-item.active {
+    color: var(--home-mint);
+  }
+
+  .extra-view {
+    min-height: 60vh;
+    padding: 15px 3px;
+  }
+
+  .extra-view h2 {
+    font-size: 26px;
+  }
+
+  .stories-row {
+    display: flex;
+    gap: 16px;
+    overflow-x: auto;
+  }
+
+  .content footer {
+    font-size: 10px;
+    line-height: 1.6;
+    padding: 20px 5px;
+  }
+}
+
+@media (min-width: 701px) {
+  .mobile-brand {
+    display: none;
+  }
+}
