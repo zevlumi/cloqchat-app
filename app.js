@@ -246,7 +246,7 @@ function showOtpScreen(mode = "signup") {
 }
 
 function showResetScreen() {
-  authTitle.textContent = "Choose New Password";
+  authTitle.textContent = "";
 
   authCredentials.style.display = "none";
   signupActions.style.display = "none";
