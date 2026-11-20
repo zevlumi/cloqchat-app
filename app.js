@@ -423,15 +423,19 @@ loginBtn.addEventListener("click", async () => {
 
 // CLOQCHAT SIGNUP / LOGIN NAVIGATION
 
-showSignup.addEventListener("click", e => {
-  e.preventDefault();
-  showSignupScreen();
-});
+if (showSignup && showLogin) {
+  showSignup.addEventListener("click", function(e) {
+    e.preventDefault();
+    showSignupScreen();
+  });
 
-showLogin.addEventListener("click", e => {
-  e.preventDefault();
-  showLoginScreen();
-});
+  showLogin.addEventListener("click", function(e) {
+    e.preventDefault();
+    showLoginScreen();
+  });
+} else {
+  console.error("Signup/Login navigation links not found.");
+}
 
 // CLOQCHAT PASSWORD SHOW / HIDE
 
