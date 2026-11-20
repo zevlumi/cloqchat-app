@@ -916,3 +916,152 @@ body,
     gap: 8px;
   }
 }
+/* CLOQCHAT FINAL MOBILE CHAT LAYOUT */
+
+.search-row {
+  width: 100%;
+  padding: 12px 20px;
+  box-sizing: border-box;
+}
+
+.search-row .search-wrap {
+  width: 100%;
+  max-width: none;
+  box-sizing: border-box;
+}
+
+.chat-heading {
+  width: 100%;
+  margin: 8px 0 14px;
+  padding: 0 20px;
+  box-sizing: border-box;
+}
+
+.chat-heading h1 {
+  margin: 0;
+  font-size: 25px;
+  color: #f4f5fb;
+}
+
+.chat-filters {
+  display: flex;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 7px;
+  width: 100%;
+  padding: 0 16px 14px;
+  box-sizing: border-box;
+  overflow: visible;
+}
+
+.chat-filters .filter-chip {
+  flex: 1 1 0;
+  min-width: 0;
+  padding: 10px 5px;
+  text-align: center;
+  white-space: nowrap;
+  font-size: 12px;
+}
+
+.new-chat-fab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: fixed;
+  right: 20px;
+  bottom: calc(88px + env(safe-area-inset-bottom));
+  width: 58px;
+  height: 58px;
+  border: none;
+  border-radius: 18px;
+  background: linear-gradient(135deg, #8968ff, #6544e8);
+  color: white;
+  font-size: 34px;
+  line-height: 1;
+  font-weight: 400;
+  box-shadow: 0 8px 25px rgba(101, 68, 232, .4);
+  z-index: 99;
+  cursor: pointer;
+}
+
+@media (max-width: 600px) {
+  html,
+  body {
+    width: 100%;
+    max-width: 100%;
+    overflow-x: hidden;
+  }
+
+  .app-shell,
+  .main-panel,
+  #chatsView {
+    width: 100%;
+    max-width: 100%;
+    min-width: 0;
+    box-sizing: border-box;
+    overflow-x: hidden;
+  }
+
+  .topbar {
+    width: 100%;
+    min-height: 58px;
+    padding: 10px 16px;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .search-row {
+    padding: 10px 16px 14px;
+  }
+
+  .search-row .search-wrap {
+    min-height: 46px;
+  }
+
+  .chat-heading {
+    padding: 0 16px;
+    margin: 5px 0 14px;
+  }
+
+  .chat-filters {
+    padding: 0 12px 14px;
+    gap: 6px;
+  }
+
+  .chat-filters .filter-chip {
+    font-size: 11px;
+    padding: 10px 3px;
+  }
+
+  .conversation-card {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .mobile-bottom-nav {
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    min-height: 66px;
+    padding: 8px 5px calc(8px + env(safe-area-inset-bottom));
+    box-sizing: border-box;
+    z-index: 100;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  #chatsView {
+    padding-bottom: 155px;
+  }
+
+  .new-chat-fab {
+    right: 18px;
+    bottom: calc(84px + env(safe-area-inset-bottom));
+  }
+}
