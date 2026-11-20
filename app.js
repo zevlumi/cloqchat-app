@@ -1,10 +1,49 @@
 const demoChats = [
-  {id:1,name:"Ayesha Khan",initial:"A",preview:"This is the beginning of something great ✨",time:"10:26",color:"teal"},
-  {id:2,name:"Usman Ali",initial:"U",preview:"Sent you a photo",time:"Yesterday",color:"blue"},
-  {id:3,name:"Sara Ahmed",initial:"S",preview:"Are we still meeting today?",time:"Mon",color:"pink"},
-  {id:4,name:"Hamza Raza",initial:"H",preview:"Voice message",time:"Sun",color:"gold"}
+  {
+    id: 1,
+    name: "Ayesha Khan",
+    initial: "A",
+    preview: "This is the beginning of something great ✨",
+    time: "10:26",
+    color: "teal",
+    unread: false,
+    favorite: true,
+    type: "personal"
+  },
+  {
+    id: 2,
+    name: "Usman Ali",
+    initial: "U",
+    preview: "Sent you a photo",
+    time: "Yesterday",
+    color: "blue",
+    unread: true,
+    favorite: false,
+    type: "personal"
+  },
+  {
+    id: 3,
+    name: "Sara Ahmed",
+    initial: "S",
+    preview: "Are we still meeting today?",
+    time: "Mon",
+    color: "pink",
+    unread: false,
+    favorite: true,
+    type: "personal"
+  },
+  {
+    id: 4,
+    name: "Hamza Raza",
+    initial: "H",
+    preview: "Voice message",
+    time: "Sun",
+    color: "gold",
+    unread: true,
+    favorite: false,
+    type: "personal"
+  }
 ];
-
 let activeId = 1;
 
 const $ = s => document.querySelector(s);
@@ -19,27 +58,58 @@ const toast = msg => {
 
 // CLOQCHAT CHAT INTERFACE
 
+
+let activeChatFilter = "all";
+
 function renderChats(filter = "") {
-  const list = demoChats.filter(c =>
+  let list = demoChats.filter(c =>
     c.name.toLowerCase().includes(filter.toLowerCase())
   );
 
-  $("#chatList").innerHTML = list.slice(0,4).map(c =>
+  if (activeChatFilter === "unread") {
+    list = list.filter(c => c.unread === true);
+  } else if (activeChatFilter === "favorites") {
+    list = list.filter(c => c.favorite === true);
+  } else if (activeChatFilter === "groups") {
+    list = list.filter(c => c.type === "group");
+  } else if (activeChatFilter === "rooms") {
+    list = list.filter(c => c.type === "room");
+  }
+
+  $("#chatList").innerHTML = list.slice(0, 4).map(c =>
     `<button class="nav-item" data-chat="${c.id}">● <span>${c.name}</span></button>`
   ).join("");
 
   $("#conversationCards").innerHTML = list.map(c =>
-    `<button class="conversation-card ${c.id===activeId?"selected":""}" data-chat="${c.id}">
+    `<button class="conversation-card ${c.id === activeId ? "selected" : ""}" data-chat="${c.id}">
       <div class="avatar">${c.initial}</div>
-      <div class="meta"><b>${c.name}</b><p>${c.preview}</p></div>
+      <div class="meta">
+        <b>${c.name}</b>
+        <p>${c.preview}</p>
+      </div>
       <time>${c.time}</time>
+      ${c.unread ? '<span class="unread-badge">New</span>' : ''}
     </button>`
-  ).join("") || '<p class="muted" style="padding:18px">No conversations found.</p>';
+  ).join("") || '<p class="muted" style="padding:18px">No conversations in this category yet.</p>';
 
   document.querySelectorAll("[data-chat]").forEach(b =>
     b.addEventListener("click", () => selectChat(Number(b.dataset.chat)))
   );
 }
+
+// Chat filter buttons
+document.querySelectorAll("[data-filter]").forEach(button => {
+  button.addEventListener("click", () => {
+    activeChatFilter = button.dataset.filter;
+
+    document.querySelectorAll("[data-filter]").forEach(item =>
+      item.classList.toggle("active", item === button)
+    );
+
+    renderChats($("#searchInput").value);
+  });
+});
+
 
 function selectChat(id) {
   activeId = id;
@@ -98,33 +168,57 @@ $("#seeAll").addEventListener("click", () =>
   toast("You are viewing the demo conversation list.")
 );
 
+
 document.querySelectorAll("[data-view]").forEach(b =>
   b.addEventListener("click", () => {
-    document.querySelectorAll("[data-view]").forEach(x =>
-      x.classList.remove("active")
-    );
-
-    b.classList.add("active");
-
     const view = b.dataset.view;
 
-    const titles = {
-      chats:"Recent conversations",
-      status:"Status & Stories",
-      groups:"Your groups",
-      vault:"Private Vault",
-      settings:"Settings"
+    // Update active navigation buttons
+    document.querySelectorAll("[data-view]").forEach(x => {
+      x.classList.toggle("active", x.dataset.view === view);
+    });
+
+    // Switch between Home Page sections
+    const views = {
+      chats: "#chatsView",
+      calls: "#callsView",
+      rooms: "#roomsView",
+      status: "#statusView",
+      settings: "#settingsView"
     };
 
-    $("#sectionTitle").textContent = titles[view] || "Workspace";
+    Object.values(views).forEach(selector => {
+      const section = $(selector);
+      if (section) section.style.display = "none";
+    });
 
-    if (view !== "chats") {
-      toast(view === "vault"
-        ? "Vault is a preview. Secure storage is not enabled yet."
-        : `${titles[view]} — coming in the next phase`);
+    const selectedView = $(views[view]);
+    if (selectedView) selectedView.style.display = "block";
+
+    const titles = {
+      chats: "Your conversations",
+      calls: "Calls",
+      rooms: "CLOQCHAT Rooms",
+      status: "Status & Stories",
+      settings: "Settings"
+    };
+
+    const sectionTitle = $("#sectionTitle");
+    if (sectionTitle && view === "chats") {
+      sectionTitle.textContent = titles.chats;
     }
   })
 );
+
+// Rooms tabs visual selection
+document.querySelectorAll(".room-tab").forEach(tab => {
+  tab.addEventListener("click", () => {
+    document.querySelectorAll(".room-tab").forEach(x =>
+      x.classList.remove("active")
+    );
+    tab.classList.add("active");
+  });
+});
 
 // CLOQCHAT SERVICE WORKER
 
