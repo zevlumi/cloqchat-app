@@ -211,7 +211,7 @@ function showSignupScreen() {
 }
 
 function showLoginScreen() {
-  authTitle.textContent = "LOGIN TEST";
+  authTitle.textContent = "Welcome Back";
   authCredentials.style.display = "block";
   forgotPasswordBtn.style.display = "block";
   signupActions.style.display = "none";
