@@ -1,4 +1,3 @@
-
 const demoChats = [
   {id:1,name:"Ayesha Khan",initial:"A",preview:"This is the beginning of something great ✨",time:"10:26",color:"teal"},
   {id:2,name:"Usman Ali",initial:"U",preview:"Sent you a photo",time:"Yesterday",color:"blue"},
@@ -190,6 +189,7 @@ const showLogin = document.getElementById("showLogin");
 const forgotPasswordBtn = document.getElementById("forgotPasswordBtn");
 
 let pendingSignupEmail = "";
+let pendingRecoveryEmail = "";
 
 // CLOQCHAT SCREEN CONTROLS
 
@@ -227,8 +227,10 @@ function showLoginScreen() {
   authMessage.textContent = "";
 }
 
-function showOtpScreen() {
-  authTitle.textContent = "Verify Your Email";
+function showOtpScreen(mode = "signup") {
+  authTitle.textContent = mode === "recovery"
+    ? "Reset Password Verification"
+    : "Verify Your Email";
 
   authCredentials.style.display = "none";
   signupActions.style.display = "none";
@@ -237,7 +239,10 @@ function showOtpScreen() {
   resetPasswordBox.style.display = "none";
 
   document.getElementById("otpCode").value = "";
-  authMessage.textContent = "Apna email check karein aur 8-digit OTP enter karein.";
+
+  authMessage.textContent = mode === "recovery"
+    ? "Enter the 8-digit code sent to your email to reset your password."
+    : "Check your email and enter the 8-digit verification code.";
 }
 
 function showResetScreen() {
@@ -253,6 +258,7 @@ function showResetScreen() {
 }
 
 function showAuthenticatedApp() {
+  authScreen.style.visibility = "hidden";
   authScreen.style.display = "none";
   appShell.style.display = "";
 }
@@ -260,6 +266,7 @@ function showAuthenticatedApp() {
 function showAuthentication() {
   appShell.style.display = "none";
   authScreen.style.display = "flex";
+  authScreen.style.visibility = "visible";
 }
 
 // CLOQCHAT SIGNUP SYSTEM
@@ -316,31 +323,37 @@ signupBtn.addEventListener("click", async () => {
 
 document.getElementById("verifyOtpBtn").addEventListener("click", async () => {
   const token = document.getElementById("otpCode").value.trim();
-  const email = pendingSignupEmail || authEmail.value.trim();
+  const isRecovery = Boolean(pendingRecoveryEmail);
+  const email = isRecovery
+    ? pendingRecoveryEmail
+    : (pendingSignupEmail || authEmail.value.trim());
+
   const button = document.getElementById("verifyOtpBtn");
 
   if (!/^\d{8}$/.test(token)) {
-    authMessage.textContent = "8-digit OTP enter karo.";
+    authMessage.textContent = "Please enter the valid 8-digit code.";
     return;
   }
 
   if (!email) {
-    authMessage.textContent = "Signup email nahi mila. Dobara signup karein.";
+    authMessage.textContent = "Email not found. Please try again.";
     return;
   }
 
   button.disabled = true;
-  authMessage.textContent = "OTP verify ho raha hai...";
+  authMessage.textContent = "Verifying code...";
 
   try {
     const { error } = await supabaseClient.auth.verifyOtp({
       email,
       token,
-      type: "signup"
+      type: isRecovery ? "recovery" : "signup"
     });
 
     if (error) {
-      authMessage.textContent = error.message;
+      authMessage.textContent = "Invalid or expired code. Please check and try again.";
+    } else if (isRecovery) {
+      showResetScreen();
     } else {
       pendingSignupEmail = "";
       showAuthenticatedApp();
@@ -348,7 +361,7 @@ document.getElementById("verifyOtpBtn").addEventListener("click", async () => {
     }
 
   } catch (error) {
-    authMessage.textContent = error.message;
+    authMessage.textContent = "Something went wrong. Please try again.";
   } finally {
     button.disabled = false;
   }
@@ -357,31 +370,45 @@ document.getElementById("verifyOtpBtn").addEventListener("click", async () => {
 // CLOQCHAT RESEND OTP
 
 document.getElementById("resendOtpBtn").addEventListener("click", async () => {
-  const email = pendingSignupEmail || authEmail.value.trim();
+  const isRecovery = Boolean(pendingRecoveryEmail);
+  const email = isRecovery
+    ? pendingRecoveryEmail
+    : (pendingSignupEmail || authEmail.value.trim());
+
   const button = document.getElementById("resendOtpBtn");
 
   if (!email) {
-    authMessage.textContent = "Signup email nahi mila.";
+    authMessage.textContent = "Email not found. Please try again.";
     return;
   }
 
   button.disabled = true;
-  authMessage.textContent = "Naya OTP bheja ja raha hai...";
+  authMessage.textContent = "Sending a new code...";
 
   try {
-    const { error } = await supabaseClient.auth.resend({
-      type: "signup",
-      email
-    });
+    let error;
+
+    if (isRecovery) {
+      const result = await supabaseClient.auth.resetPasswordForEmail(email, {
+        redirectTo: window.location.origin
+      });
+      error = result.error;
+    } else {
+      const result = await supabaseClient.auth.resend({
+        type: "signup",
+        email
+      });
+      error = result.error;
+    }
 
     if (error) {
-      authMessage.textContent = error.message;
+      authMessage.textContent = "Unable to resend the code. Please try again later.";
     } else {
-      authMessage.textContent = "Agar email eligible hai to naya OTP bhej diya gaya hai. Apna inbox check karein.";
+      authMessage.textContent = "A new code has been sent. Please check your email.";
     }
 
   } catch (error) {
-    authMessage.textContent = error.message;
+    authMessage.textContent = "Something went wrong. Please try again.";
   } finally {
     button.disabled = false;
   }
@@ -408,14 +435,15 @@ loginBtn.addEventListener("click", async () => {
     });
 
     if (error) {
-      authMessage.textContent = error.message;
+      authMessage.textContent =
+        "Wrong email or password. Please check your details and try again.";
     } else {
       showAuthenticatedApp();
       toast("Login successful! Welcome to CLOQCHAT.");
     }
 
   } catch (error) {
-    authMessage.textContent = error.message;
+    authMessage.textContent = "Something went wrong. Please try again.";
   } finally {
     loginBtn.disabled = false;
   }
@@ -457,12 +485,12 @@ forgotPasswordBtn.addEventListener("click", async () => {
   const email = authEmail.value.trim();
 
   if (!email) {
-    authMessage.textContent = "Pehle apna email enter karo.";
+    authMessage.textContent = "Please enter your email address first.";
     return;
   }
 
   forgotPasswordBtn.disabled = true;
-  authMessage.textContent = "Reset email bheji ja rahi hai...";
+  authMessage.textContent = "Sending password reset email...";
 
   try {
     const { error } = await supabaseClient.auth.resetPasswordForEmail(email, {
@@ -472,20 +500,24 @@ forgotPasswordBtn.addEventListener("click", async () => {
     if (error) {
       if (
         error.message.toLowerCase().includes("rate limit") ||
-        error.message.toLowerCase().includes("limit exceeded")
+        error.message.toLowerCase().includes("limit exceeded") ||
+        error.message.toLowerCase().includes("too many requests")
       ) {
         authMessage.textContent =
-          "Email limit poori ho gayi hai. Kuch der baad dobara try karein.";
+          "Email limit reached. Please try again later.";
       } else {
-        authMessage.textContent = error.message;
+        authMessage.textContent =
+          "Unable to send reset email. Please try again.";
       }
     } else {
+      pendingRecoveryEmail = email;
+      showOtpScreen("recovery");
       authMessage.textContent =
-        "Agar is email par account maujood hai to password reset email bhej di gayi hai. Apna inbox check karein.";
+        "Password reset email sent! Please check your email address.";
     }
 
   } catch (error) {
-    authMessage.textContent = error.message;
+    authMessage.textContent = "Something went wrong. Please try again.";
   } finally {
     forgotPasswordBtn.disabled = false;
   }
@@ -535,8 +567,10 @@ document.getElementById("updatePasswordBtn").addEventListener("click", async () 
     if (error) {
       message.textContent = error.message;
     } else {
-      message.textContent = "Password successfully change ho gaya! Ab naye password se login kar sakte hain.";
+      message.textContent =
+        "Password successfully changed! You can now log in with your new password.";
 
+      pendingRecoveryEmail = "";
       await supabaseClient.auth.signOut();
     }
 
@@ -572,4 +606,3 @@ async function initializeAuth() {
 }
 
 initializeAuth();
-                              
