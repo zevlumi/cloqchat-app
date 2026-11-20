@@ -12,6 +12,7 @@ const $ = s => document.querySelector(s);
 
 const toast = msg => {
   const t = $("#toast");
+  if (!t) return;
   t.textContent = msg;
   t.classList.add("show");
   setTimeout(() => t.classList.remove("show"), 2200);
@@ -142,7 +143,14 @@ const SUPABASE_KEY = "sb_publishable_4Qxdzq-igkJCowfqYy6b9Q_RZMTHb0x";
 
 const supabaseClient = window.supabase.createClient(
   SUPABASE_URL,
-  SUPABASE_KEY
+  SUPABASE_KEY,
+  {
+    auth: {
+      persistSession: true,
+      autoRefreshToken: true,
+      detectSessionInUrl: true
+    }
+  }
 );
 
 // DATABASE CONNECTION TEST
@@ -189,6 +197,7 @@ function showSignupScreen() {
   authTitle.textContent = "Create Account";
 
   authCredentials.style.display = "block";
+  forgotPasswordBtn.style.display = "none";
   signupActions.style.display = "block";
   loginActions.style.display = "none";
   otpBox.style.display = "none";
@@ -414,8 +423,15 @@ loginBtn.addEventListener("click", async () => {
 
 // CLOQCHAT SIGNUP / LOGIN NAVIGATION
 
-showSignup.addEventListener("click", showSignupScreen);
-showLogin.addEventListener("click", showLoginScreen);
+showSignup.addEventListener("click", e => {
+  e.preventDefault();
+  showSignupScreen();
+});
+
+showLogin.addEventListener("click", e => {
+  e.preventDefault();
+  showLoginScreen();
+});
 
 // CLOQCHAT PASSWORD SHOW / HIDE
 
@@ -530,22 +546,26 @@ document.getElementById("updatePasswordBtn").addEventListener("click", async () 
 // CLOQCHAT INITIAL AUTH CHECK
 
 async function initializeAuth() {
-  showAuthentication();
-  showSignupScreen();
+  try {
+    const { data, error } = await supabaseClient.auth.getSession();
 
-  const { data, error } = await supabaseClient.auth.getSession();
+    if (error) {
+      throw error;
+    }
 
-  if (error) {
+    if (data.session) {
+      showAuthenticatedApp();
+    } else {
+      showAuthentication();
+      showSignupScreen();
+    }
+
+  } catch (error) {
     console.error("Session check error:", error.message);
-    return;
-  }
-
-  if (data.session) {
-    showAuthenticatedApp();
-  } else {
     showAuthentication();
+    showSignupScreen();
   }
 }
 
 initializeAuth();
- 
+                              
