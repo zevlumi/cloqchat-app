@@ -216,6 +216,7 @@ function showLoginScreen() {
   forgotPasswordBtn.style.display = "block";
   signupActions.style.display = "none";
   loginActions.style.display = "block";
+  loginActions.style.visibility = "visible";
   otpBox.style.display = "none";
   resetPasswordBox.style.display = "none";
 
