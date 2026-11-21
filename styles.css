@@ -1065,3 +1065,46 @@ body,
     bottom: calc(84px + env(safe-area-inset-bottom));
   }
 }
+/* FINAL CHAT FILTER POSITION FIX */
+
+#chatsView {
+  display: flex;
+  flex-direction: column;
+}
+
+#chatsView .chat-heading {
+  order: 1;
+  flex-shrink: 0;
+}
+
+#chatsView .section-heading {
+  display: none !important;
+}
+
+#chatsView .chat-filters {
+  order: 2;
+  flex-shrink: 0;
+  margin: 0 0 12px;
+  position: relative;
+}
+
+#chatsView .new-chat-fab {
+  position: fixed;
+}
+
+#chatsView .conversation-layout {
+  order: 3;
+  flex: 1;
+  min-height: 0;
+}
+
+@media (max-width: 600px) {
+  #chatsView .chat-heading {
+    padding: 0 16px;
+    margin: 5px 0 12px;
+  }
+
+  #chatsView .chat-filters {
+    padding: 0 12px 12px;
+  }
+}
