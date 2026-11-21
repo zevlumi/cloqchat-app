@@ -178,31 +178,27 @@
       <!-- CHATS HOME -->
       <section id="chatsView" class="home-view">
         
+
 <div class="chat-heading">
   <h1>Your Chats</h1>
 </div>
-        
 
-  <button class="new-chat-main" id="newChatMainBtn">
-    <span>+</span> New Chat
-  </button>
-        </div>
+<!-- Hidden compatibility section -->
+<div class="section-heading" style="display:none">
+  <div>
+    <span class="eyebrow">STAY CONNECTED</span>
+    <h2 id="sectionTitle">Your conversations</h2>
+  </div>
+  <button class="text-button" id="seeAll">See all</button>
+</div>
 
-        <div class="section-heading">
-          <div>
-            <span class="eyebrow">STAY CONNECTED</span>
-            <h2 id="sectionTitle">Your conversations</h2>
-          </div>
-          <button class="text-button" id="seeAll">See all</button>
-        </div>
-
-        <div class="chat-filters" id="chatFilters">
+<div class="chat-filters" id="chatFilters">
   <button class="filter-chip active" data-filter="all">All</button>
   <button class="filter-chip" data-filter="unread">Unread</button>
   <button class="filter-chip" data-filter="favorites">Favorites</button>
   <button class="filter-chip" data-filter="groups">Groups</button>
-        </div>
-        
+</div>
+
 <button
   class="new-chat-fab"
   id="newChatMainBtn"
@@ -211,6 +207,7 @@
 >
   +
 </button>
+        
         
 
         <div class="conversation-layout">
